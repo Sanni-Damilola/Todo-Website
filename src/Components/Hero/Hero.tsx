@@ -8,6 +8,7 @@ interface data {
   Describe: string;
   start: string;
   end: string;
+  time: string;
 }
 
 const Hero = () => {
@@ -37,10 +38,10 @@ const Hero = () => {
     setDate(now.toDateString());
     let hr = now.getHours().toString();
     let min = now.getMinutes().toString();
+    let sec = now.getSeconds().toString();
     // let aporpm = now.toString();
     var aMorPm = hr >= "12" ? "pm" : "am";
 
-    setTime(`${hr}:${min} ${aMorPm}`);
 
     // get all data
     setData((prev) =>
@@ -53,6 +54,7 @@ const Hero = () => {
           Describe: des,
           start: start,
           end: end,
+          time: `${hr}:${min}:${sec}:${aMorPm}`,
         },
       ].sort(sortinfo("id"))
     );
@@ -64,8 +66,7 @@ const Hero = () => {
 
   // date
   const [date, setDate] = React.useState<any>();
-  // tieme
-  const [time, setTime] = React.useState<any>();
+ 
 
   //   delete task;
   const deleteTask = (id: number) => {
@@ -102,7 +103,7 @@ const Hero = () => {
   const chageDoneState = () => {
     setDone(true);
     data[0].staus = true;
-    alert("alert Task Done")
+    alert("alert Task Done");
   };
 
   return (
@@ -174,7 +175,7 @@ const Hero = () => {
             <i>Description:</i> {data.Describe}
           </Dis>
           <Time>This Task Was Created on {date}</Time>
-          <Time>By {time}</Time>
+          <Time>By {data.time}</Time>
           <Start>
             <i>Start :</i> {data.start}
           </Start>
@@ -183,7 +184,7 @@ const Hero = () => {
             <i>End :</i> {data.end}
           </End>
           {/* edit */}
-          {data.id == edit && falses ? (
+          {data.id === edit && falses ? (
             <input
               onChange={(e) => {
                 setinput(e.target.value);
@@ -195,7 +196,7 @@ const Hero = () => {
             />
           ) : null}
           <Wrap>
-            {data.id == edit && falses ? (
+            {data.id === edit && falses ? (
               <Button
                 onClick={() => {
                   updateButton();
@@ -320,7 +321,6 @@ const Textarea = styled.textarea`
   padding-top: 10px;
   outline: none;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
   @media screen and (max-width: 500px) {
     width: 200px;
   }
@@ -347,7 +347,6 @@ const Card = styled.div`
   padding-bottom: 20px;
   background-color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
   @media screen and (max-width: 500px) {
     font-size: 15px;
     padding: 0;
@@ -356,7 +355,6 @@ const Card = styled.div`
     padding-top: 20px;
     flex-wrap: wrap;
   }
-
   i {
     color: green;
     font-weight: bold;
@@ -433,7 +431,6 @@ const Button = styled.button<{ bg: string }>`
   text-transform: capitalize;
   font-weight: 500;
   cursor: pointer;
-
   @media screen and (max-width: 500px) {
     font-size: 14px;
     padding: 8px 10px;
@@ -451,11 +448,9 @@ const Submit = styled.button<{ bg: string; cusor: string }>`
   font-size: 19px;
   background-color: ${(bg) => bg.bg};
   transition: 360ms;
-
   @media screen and (max-width: 500px) {
     padding: 17px 90px;
   }
-
   :hover {
     transform: scale(0.9);
   }
@@ -467,7 +462,6 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-
   nav {
     width: 300px;
     text-align: center;
@@ -477,28 +471,23 @@ const Container = styled.div`
       margin-right: 4px;
       margin-left: 4px;
     }
-
     @media screen and (max-width: 500px) {
       width: 250px;
     }
   }
-
   h2 {
     font-size: 20px;
     text-transform: capitalize;
-
     @media screen and (max-width: 500px) {
       font-size: 17px;
     }
   }
-
   h3 {
     text-transform: capitalize;
     @media screen and (max-width: 500px) {
       font-size: 17px;
     }
   }
-
   span {
     font-weight: 500;
     font-size: 17px;
@@ -515,7 +504,6 @@ const Input = styled.input`
   border-radius: 6px;
   padding-left: 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
   @media screen and (max-width: 500px) {
     width: 200px;
   }
